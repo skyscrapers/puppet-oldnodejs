@@ -15,29 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# == Class: nodejs
+# == Class nodejs::config
 #
-# This class is able to install nodejs
+# This class is called from nodejs
 #
-#
-# === Parameters
-#
-#
-# === Examples
-#
-# * Installation of nodejs
-#     class {'nodejs':
-#       repo    => 'test',
-#}
-#
-class nodejs(
-  $repo       = $nodejs::params::repo,
-  $registry   = undef
-  ) inherits nodejs::params {
+class nodejs::config {
 
-    contain 'nodejs::repo'
-    contain 'nodejs::install'
-    contain 'nodejs::config'
-    
-    Class['nodejs::repo'] -> Class['nodejs::install'] -> Class['nodejs::config']
+  if( $nodejs::registry != undef) {
+    file {
+      '/usr/etc':
+        ensure  => directory,
+        mode    => '0764',
+        owner   => root,
+        group   => root;
+
+      '/usr/etc/npmrc':
+        ensure  => file,
+        content => template ('nodejs/usr/etc/npmrc.erb'),
+        owner   => root,
+        group   => root,
+        mode    => '0640',
+        require => File['/usr/etc'];
+    }
+  }
 }
