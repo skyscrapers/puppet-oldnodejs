@@ -16,7 +16,9 @@ define nodejs::npm (
   $remove_opt   = undef,
   $exec_as_user = undef
 ) {
-  include nodejs
+  if !defined(Class['nodejs']) {
+    class { 'nodejs': }
+  }
 
   $npm = split($name, ':')
   $npm_dir = $npm[0]

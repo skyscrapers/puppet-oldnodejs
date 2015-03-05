@@ -38,6 +38,6 @@ class nodejs(
     contain 'nodejs::repo'
     contain 'nodejs::install'
     contain 'nodejs::config'
-    
+
     Class['nodejs::repo'] -> Class['nodejs::install'] -> Class['nodejs::config']
 }
