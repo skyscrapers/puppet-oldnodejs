@@ -21,7 +21,7 @@
 #
 class nodejs::config {
 
-  if( $nodejs::registry != undef) {
+  #if( $nodejs::registry != undef) {
     file {
       '/usr/etc':
         ensure  => directory,
@@ -36,6 +36,6 @@ class nodejs::config {
         group   => root,
         mode    => '0640',
         require => File['/usr/etc'];
-    }
+    #}
   }
 }

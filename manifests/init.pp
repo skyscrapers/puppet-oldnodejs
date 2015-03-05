@@ -32,7 +32,9 @@
 #
 class nodejs(
   $repo       = $nodejs::params::repo,
-  $registry   = undef
+  $registry   = undef,
+  $auth       = undef,
+  $email      = undef,
   ) inherits nodejs::params {
 
     contain 'nodejs::repo'
