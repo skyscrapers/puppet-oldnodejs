@@ -34,7 +34,7 @@ class nodejs::config {
         content => template ('nodejs/usr/etc/npmrc.erb'),
         owner   => root,
         group   => root,
-        mode    => '0640',
+        mode    => '0644',
         require => File['/usr/etc'];
     #}
   }
