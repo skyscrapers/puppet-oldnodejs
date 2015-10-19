@@ -21,6 +21,6 @@
 # It sets variables according to platform
 #
 class nodejs::params {
-  $repo    = 'prod',
+  $repo    = 'prod'
   $version = undef
 }
