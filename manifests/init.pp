@@ -32,6 +32,7 @@
 #
 class nodejs(
   $repo       = $nodejs::params::repo,
+  $version    = $nodejs::params::version,
   $registry   = undef,
   $auth       = undef,
   $email      = undef,

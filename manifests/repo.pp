@@ -24,23 +24,39 @@ class nodejs::repo {
     class { 'apt': }
   }
 
-  if ($nodejs::repo == 'test') {
-    apt::source { 'precise-nodejs-test':
-      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-      release     => 'precise-nodejs-test',
+  if ($nodejs::version == '4') {
+    file { "${::lsbdistcodename}-nodejs":
+      ensure => 'absent',
+      path   => "/etc/apt/sources.list.d/${name}.list",
+      notify => Exec['apt_update'],
+    }
+    apt::source { "${::lsbdistcodename}-node4":
+      location    => 'http://repo.int.skyscrape.rs/',
+      release     => "${::lsbdistcodename}-node4",
       repos       => 'main',
-      key         => '1BC1B9EF',
-      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+      key         => '0407B13E',
       include_src => false,
     }
   } else {
-    apt::source { 'precise-nodejs':
-      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-      release     => 'precise-nodejs',
-      repos       => 'main',
-      key         => '1BC1B9EF',
-      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-      include_src => false,
+
+    if ($nodejs::repo == 'test') {
+      apt::source { 'precise-nodejs-test':
+        location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+        release     => 'precise-nodejs-test',
+        repos       => 'main',
+        key         => '1BC1B9EF',
+        key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+        include_src => false,
+      }
+    } else {
+      apt::source { 'precise-nodejs':
+        location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+        release     => 'precise-nodejs',
+        repos       => 'main',
+        key         => '1BC1B9EF',
+        key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+        include_src => false,
+      }
     }
   }
 }
