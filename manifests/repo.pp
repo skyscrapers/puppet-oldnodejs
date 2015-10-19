@@ -38,7 +38,11 @@ class nodejs::repo {
       include_src => false,
     }
   } else {
-
+    file { "${::lsbdistcodename}-node4":
+      ensure => 'absent',
+      path   => "/etc/apt/sources.list.d/${name}.list",
+      notify => Exec['apt_update'],
+    }
     if ($nodejs::repo == 'test') {
       apt::source { 'precise-nodejs-test':
         location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
