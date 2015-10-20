@@ -37,6 +37,20 @@ class nodejs::repo {
       key         => '0407B13E',
       include_src => false,
     }
+    if ($::lsbdistcodename == 'precise'){
+        apt::source { 'ubuntu-toolchain':
+          location    => 'http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu/',
+          release     => 'precise',
+          repos       => 'main',
+          key         => 'BA9EF27F',
+          key_source  => 'http://llvm.org/apt/llvm-snapshot.gpg.key',
+          include_src => false,
+        } ->
+        package {
+          'clang-3.4':
+            ensure  => latest,
+        }
+    }
   } else {
     file { "${::lsbdistcodename}-node4":
       ensure => 'absent',
