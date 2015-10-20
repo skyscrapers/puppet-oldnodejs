@@ -43,6 +43,12 @@ class nodejs::repo {
           release     => 'precise',
           repos       => 'main',
           key         => 'BA9EF27F',
+          include_src => false,
+        }
+        apt::source { 'llvm-toolchain':
+          location    => 'http://llvm.org/apt/precise/',
+          release     => 'llvm-toolchain-precise-3.4',
+          repos       => 'main',
           key_source  => 'http://llvm.org/apt/llvm-snapshot.gpg.key',
           include_src => false,
         } ->
