@@ -57,6 +57,19 @@ class nodejs::repo {
             ensure  => latest,
         }
     }
+  } else if ($nodejs::version == '0.12') {
+    file { "${::lsbdistcodename}-nodejs":
+      ensure => 'absent',
+      path   => "/etc/apt/sources.list.d/${name}.list",
+      notify => Exec['apt_update'],
+    }
+    apt::source { "${::lsbdistcodename}-node0.12":
+      location    => 'https://deb.nodesource.com/node_0.12/',
+      release     => "${::lsbdistcodename}",
+      repos       => 'main',
+      key_source  => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+      include_src => false,
+    }
   } else {
     file { "${::lsbdistcodename}-node4":
       ensure => 'absent',
