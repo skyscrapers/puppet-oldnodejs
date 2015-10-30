@@ -57,7 +57,7 @@ class nodejs::repo {
             ensure  => latest,
         }
     }
-  } else if ($nodejs::version == '0.12') {
+  } elsif ($nodejs::version == '0.12') {
     file { "${::lsbdistcodename}-nodejs":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
