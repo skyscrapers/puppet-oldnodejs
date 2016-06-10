@@ -32,7 +32,7 @@ class nodejs::repo {
     }
     apt::source { "${::lsbdistcodename}-node4":
       location    => 'http://repo.int.skyscrape.rs/',
-      release     => "${::lsbdistcodename}-node4",
+      release     => "${::lsbdistcodename}-nodesource4",
       repos       => 'main',
       key         => '0407B13E',
       include_src => false,
