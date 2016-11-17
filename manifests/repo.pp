@@ -86,7 +86,21 @@ class nodejs::repo {
       required_packages => 'apt-transport-https ca-certificates',
       key               => '68576280',
     }
-  } else {
+  } elsif ($nodejs::version == '7') {
+    file { "${::lsbdistcodename}-nodejs":
+      ensure => 'absent',
+      path   => "/etc/apt/sources.list.d/${name}.list",
+      notify => Exec['apt_update'],
+    }
+
+    apt::source { 'nodesource':
+      location          => "https://deb.nodesource.com/node_7.x/",
+      release           => $::lsbdistcodename,
+      repos             => 'main',
+      key_source        => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+      include_src       => false,
+      required_packages => 'apt-transport-https ca-certificates',
+    } else {
     file { "${::lsbdistcodename}-node4":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
