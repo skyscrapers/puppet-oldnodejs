@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# == Class nodejs::config
+# == Class oldnodejs::config
 #
 # This class is called from nodejs
 #
-class nodejs::config {
+class oldnodejs::config {
 
-  #if( $nodejs::registry != undef) {
+  #if( $oldnodejs::registry != undef) {
     file {
       '/usr/etc':
         ensure  => directory,
@@ -31,7 +31,7 @@ class nodejs::config {
 
       '/usr/etc/npmrc':
         ensure  => file,
-        content => template ('nodejs/usr/etc/npmrc.erb'),
+        content => template ('oldnodejs/usr/etc/npmrc.erb'),
         owner   => root,
         group   => root,
         mode    => '0644',

@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# == Class nodejs::install
+# == Class oldnodejs::install
 #
 # This class is called from nodejs for install.
 #
-class nodejs::install {
+class oldnodejs::install {
 
   $basepackages  = ['nodejs']
 

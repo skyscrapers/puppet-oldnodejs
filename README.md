@@ -1,7 +1,7 @@
-puppet-nodejs
+puppet-oldnodejs
 ==============
 
-Install nodejs with Puppet
+Install oldnodejs with Puppet
 
 ## Setup
 
