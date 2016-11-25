@@ -30,17 +30,17 @@
 #       repo    => 'test',
 #}
 #
-class nodejs(
-  $repo       = $nodejs::params::repo,
-  $version    = $nodejs::params::version,
+class oldnodejs(
+  $repo       = $oldnodejs::params::repo,
+  $version    = $oldnodejs::params::version,
   $registry   = undef,
   $auth       = undef,
   $email      = undef,
-  ) inherits nodejs::params {
+  ) inherits oldnodejs::params {
 
-    contain 'nodejs::repo'
-    contain 'nodejs::install'
-    contain 'nodejs::config'
+    contain 'oldnodejs::repo'
+    contain 'oldnodejs::install'
+    contain 'oldnodejs::config'
 
-    Class['nodejs::repo'] -> Class['nodejs::install'] -> Class['nodejs::config']
+    Class['oldnodejs::repo'] -> Class['oldnodejs::install'] -> Class['oldnodejs::config']
 }

@@ -1,4 +1,4 @@
-# Define: nodejs::npm
+# Define: oldnodejs::npm
 #
 # Parameters:
 #
@@ -8,7 +8,7 @@
 #
 # Usage:
 #
-define nodejs::npm (
+define oldnodejs::npm (
   $ensure       = present,
   $version      = undef,
   $source       = undef,
@@ -16,8 +16,8 @@ define nodejs::npm (
   $remove_opt   = undef,
   $exec_as_user = undef
 ) {
-  if !defined(Class['nodejs']) {
-    class { 'nodejs': }
+  if !defined(Class['oldnodejs']) {
+    class { 'oldnodejs': }
   }
 
   $npm = split($name, ':')
@@ -62,7 +62,7 @@ define nodejs::npm (
       unless      => "npm list -p -l | grep '${validate}'",
       cwd         => $npm_dir,
       path        => $::path,
-      require     => Class['nodejs'],
+      require     => Class['oldnodejs'],
       user        => $exec_as_user,
       environment => $exec_env,
     }
@@ -75,7 +75,7 @@ define nodejs::npm (
       onlyif      => "npm list -p -l | grep '${validate}'",
       cwd         => $npm_dir,
       path        => $::path,
-      require     => Class['nodejs'],
+      require     => Class['oldnodejs'],
       user        => $exec_as_user,
       environment => $exec_env,
     }

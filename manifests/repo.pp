@@ -15,16 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# == Class nodejs::repo
+# == Class oldnodejs::repo
 #
 # This class is called from nodejs
 #
-class nodejs::repo {
+class oldnodejs::repo {
   if !defined(Class['apt']) {
     class { 'apt': }
   }
 
-  if ($nodejs::version == '4') {
+  if ($oldnodejs::version == '4') {
     file { "${::lsbdistcodename}-nodejs":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
@@ -58,7 +58,7 @@ class nodejs::repo {
             ensure  => latest,
         }
     }
-  } elsif ($nodejs::version == '0.12') {
+  } elsif ($oldnodejs::version == '0.12') {
     file { "${::lsbdistcodename}-nodejs":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
@@ -71,7 +71,7 @@ class nodejs::repo {
       key_source  => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
       include_src => false,
     }
-  } elsif ($nodejs::version == '5') {
+  } elsif ($oldnodejs::version == '5') {
     file { "${::lsbdistcodename}-nodejs":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
@@ -87,7 +87,7 @@ class nodejs::repo {
       required_packages => 'apt-transport-https ca-certificates',
       key               => '68576280',
     }
-  } elsif ($nodejs::version == '6') {
+  } elsif ($oldnodejs::version == '6') {
     file { "${::lsbdistcodename}-nodejs":
       ensure => 'absent',
       path   => "/etc/apt/sources.list.d/${name}.list",
@@ -103,7 +103,7 @@ class nodejs::repo {
       required_packages => 'apt-transport-https ca-certificates',
       key               => '68576280',
     }
-  } elsif ($nodejs::version == '7') {
+  } elsif ($oldnodejs::version == '7') {
       file { "${::lsbdistcodename}-nodejs":
         ensure => 'absent',
         path   => "/etc/apt/sources.list.d/${name}.list",
@@ -125,7 +125,7 @@ class nodejs::repo {
       path   => "/etc/apt/sources.list.d/${name}.list",
       notify => Exec['apt_update'],
     }
-    if ($nodejs::repo == 'test') {
+    if ($oldnodejs::repo == 'test') {
       apt::source { 'precise-nodejs-test':
         location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
         release     => 'precise-nodejs-test',

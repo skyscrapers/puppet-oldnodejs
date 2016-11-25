@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# == Class nodejs::params
+# == Class oldnodejs::params
 #
 # This class is meant to be called from nodejs
 # It sets variables according to platform
 #
-class nodejs::params {
+class oldnodejs::params {
   $repo    = 'prod'
   $version = undef
 }
