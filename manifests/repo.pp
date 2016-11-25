@@ -35,6 +35,7 @@ class nodejs::repo {
       release     => "${::lsbdistcodename}-nodesource4",
       repos       => 'main',
       key         => '0407B13E',
+      key_server  => 'hkp://keyserver.ubuntu.com:80',
       include_src => false,
     }
     if ($::lsbdistcodename == 'precise'){
