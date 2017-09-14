@@ -130,7 +130,7 @@ class oldnodejs::repo {
         location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
         release     => 'precise-nodejs-test',
         repos       => 'main',
-        key         => '1BC1B9EF',
+        key         => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
         key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
         include_src => false,
       }
@@ -139,7 +139,7 @@ class oldnodejs::repo {
         location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
         release     => 'precise-nodejs',
         repos       => 'main',
-        key         => '1BC1B9EF',
+        key         => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
         key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
         include_src => false,
       }
