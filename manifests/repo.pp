@@ -34,7 +34,7 @@ class oldnodejs::repo {
       location    => 'http://repo.int.skyscrape.rs/',
       release     => "${::lsbdistcodename}-nodesource4",
       repos       => 'main',
-      key         => '0407B13E',
+      key         => '4633E867BE98D6919D4866A87B3E9B1E167A0F96',
       key_server  => 'hkp://keyserver.ubuntu.com:80',
       include_src => false,
     }
