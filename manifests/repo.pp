@@ -31,12 +31,13 @@ class oldnodejs::repo {
       notify => Exec['apt_update'],
     }
     apt::source { "${::lsbdistcodename}-node4":
-      location    => 'http://repo.int.skyscrape.rs/',
-      release     => "${::lsbdistcodename}-nodesource4",
-      repos       => 'main',
-      key         => '4633E867BE98D6919D4866A87B3E9B1E167A0F96',
-      key_server  => 'hkp://keyserver.ubuntu.com:80',
-      include_src => false,
+      location => 'http://repo.int.skyscrape.rs/',
+      release  => "${::lsbdistcodename}-nodesource4",
+      repos    => 'main',
+      key      => {
+        'id'     => '4633E867BE98D6919D4866A87B3E9B1E167A0F96',
+        'server' => 'hkp://keyserver.ubuntu.com:80',
+      },
     }
     if ($::lsbdistcodename == 'precise'){
         apt::source { 'ubuntu-toolchain':
@@ -47,15 +48,16 @@ class oldnodejs::repo {
           include_src => false,
         }
         apt::source { 'llvm-toolchain':
-          location    => 'http://llvm.org/apt/precise/',
-          release     => 'llvm-toolchain-precise-3.4',
-          repos       => 'main',
-          key_source  => 'http://llvm.org/apt/llvm-snapshot.gpg.key',
-          include_src => false,
+          location => 'http://llvm.org/apt/precise/',
+          release  => 'llvm-toolchain-precise-3.4',
+          repos    => 'main',
+          key      => {
+            'source' => 'http://llvm.org/apt/llvm-snapshot.gpg.key',
+          },
         } ->
         package {
           'clang-3.4':
-            ensure  => latest,
+            ensure => latest,
         }
     }
   } elsif ($oldnodejs::version == '0.12') {
@@ -65,11 +67,12 @@ class oldnodejs::repo {
       notify => Exec['apt_update'],
     }
     apt::source { "${::lsbdistcodename}-node0.12":
-      location    => 'https://deb.nodesource.com/node_0.12/',
-      release     => "${::lsbdistcodename}",
-      repos       => 'main',
-      key_source  => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
-      include_src => false,
+      location => 'https://deb.nodesource.com/node_0.12/',
+      release  => ${::lsbdistcodename},
+      repos    => 'main',
+      key      => {
+        'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+      },
     }
   } elsif ($oldnodejs::version == '5') {
     file { "${::lsbdistcodename}-nodejs":
@@ -82,10 +85,11 @@ class oldnodejs::repo {
       location          => "https://deb.nodesource.com/node_5.x/",
       release           => $::lsbdistcodename,
       repos             => 'main',
-      key_source        => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
-      include_src       => false,
+      key               => {
+        'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+        'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+      },
       required_packages => 'apt-transport-https ca-certificates',
-      key               => '68576280',
     }
   } elsif ($oldnodejs::version == '6') {
     file { "${::lsbdistcodename}-nodejs":
@@ -98,10 +102,11 @@ class oldnodejs::repo {
       location          => "https://deb.nodesource.com/node_6.x/",
       release           => $::lsbdistcodename,
       repos             => 'main',
-      key_source        => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
-      include_src       => false,
+      key               => {
+        'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+        'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+      },
       required_packages => 'apt-transport-https ca-certificates',
-      key               => '68576280',
     }
   } elsif ($oldnodejs::version == '7') {
       file { "${::lsbdistcodename}-nodejs":
@@ -114,10 +119,11 @@ class oldnodejs::repo {
         location          => "https://deb.nodesource.com/node_7.x/",
         release           => $::lsbdistcodename,
         repos             => 'main',
-        key_source        => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
-        include_src       => false,
+        key               => {
+          'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
+          'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
+        },
         required_packages => 'apt-transport-https ca-certificates',
-        key               => '68576280',
       }
     } else {
     file { "${::lsbdistcodename}-node4":
@@ -127,21 +133,23 @@ class oldnodejs::repo {
     }
     if ($oldnodejs::repo == 'test') {
       apt::source { 'precise-nodejs-test':
-        location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-        release     => 'precise-nodejs-test',
-        repos       => 'main',
-        key         => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
-        key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-        include_src => false,
+        location => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+        release  => 'precise-nodejs-test',
+        repos    => 'main',
+        key      => {
+          'id'     => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
+          'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+        },
       }
     } else {
       apt::source { 'precise-nodejs':
-        location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-        release     => 'precise-nodejs',
-        repos       => 'main',
-        key         => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
-        key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-        include_src => false,
+        location => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+        release  => 'precise-nodejs',
+        repos    => 'main',
+        key      => {
+          'id'     => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
+          'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+        },
       }
     }
   }
