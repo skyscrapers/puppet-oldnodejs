@@ -68,7 +68,7 @@ class oldnodejs::repo {
     }
     apt::source { "${::lsbdistcodename}-node0.12":
       location => 'https://deb.nodesource.com/node_0.12/',
-      release  => ${::lsbdistcodename},
+      release  => $::lsbdistcodename,
       repos    => 'main',
       key      => {
         'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
@@ -82,7 +82,7 @@ class oldnodejs::repo {
     }
 
     apt::source { 'nodesource':
-      location          => "https://deb.nodesource.com/node_5.x/",
+      location          => 'https://deb.nodesource.com/node_5.x/',
       release           => $::lsbdistcodename,
       repos             => 'main',
       key               => {
@@ -99,7 +99,7 @@ class oldnodejs::repo {
     }
 
     apt::source { 'nodesource':
-      location          => "https://deb.nodesource.com/node_6.x/",
+      location          => 'https://deb.nodesource.com/node_6.x/',
       release           => $::lsbdistcodename,
       repos             => 'main',
       key               => {
@@ -116,7 +116,7 @@ class oldnodejs::repo {
       }
 
       apt::source { 'nodesource':
-        location          => "https://deb.nodesource.com/node_7.x/",
+        location          => 'https://deb.nodesource.com/node_7.x/',
         release           => $::lsbdistcodename,
         repos             => 'main',
         key               => {
