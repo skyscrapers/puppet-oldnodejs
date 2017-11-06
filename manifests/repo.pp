@@ -86,7 +86,7 @@ class oldnodejs::repo {
     package { 'apt-transport-https':
             ensure => present,
     }
-    
+
     package { ' ca-certificates':
             ensure => present,
     }
@@ -116,7 +116,6 @@ class oldnodejs::repo {
         'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
         'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
       },
-      required_packages => 'apt-transport-https ca-certificates',
     }
   } elsif ($oldnodejs::version == '7') {
       file { "${::lsbdistcodename}-nodejs":
@@ -133,7 +132,6 @@ class oldnodejs::repo {
           'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
           'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
         },
-        required_packages => 'apt-transport-https ca-certificates',
       }
     } else {
     file { "${::lsbdistcodename}-node4":
