@@ -82,6 +82,10 @@ class oldnodejs::repo {
       notify => Exec['apt_update'],
     }
 
+
+    package { 'apt-transport-https ca-certificates':
+        ensure => present,
+    }
     apt::source { 'nodesource':
       location          => 'https://deb.nodesource.com/node_5.x/',
       release           => $::lsbdistcodename,
@@ -90,7 +94,7 @@ class oldnodejs::repo {
         'id'     => '9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280',
         'source' => 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key',
       },
-      required_packages => 'apt-transport-https ca-certificates',
+      require => Package['apt-transport-https ca-certificates'],
     }
   } elsif ($oldnodejs::version == '6') {
     file { "${::lsbdistcodename}-nodejs":
