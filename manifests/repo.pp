@@ -82,15 +82,6 @@ class oldnodejs::repo {
       notify => Exec['apt_update'],
     }
 
-
-    package { 'apt-transport-https':
-            ensure => present,
-    }
-
-    package { ' ca-certificates':
-            ensure => present,
-    }
-
     apt::source { 'nodesource':
       location          => 'https://deb.nodesource.com/node_5.x/',
       release           => $::lsbdistcodename,
